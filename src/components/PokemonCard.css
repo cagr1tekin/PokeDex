@@ -1,0 +1,260 @@
+/* ─── Base Card ──────────────────────────────────────────── */
+.pcard {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  animation: card-in 300ms ease-out both;
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* corner brackets */
+.pcard__corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--type-color, var(--primary));
+  border-style: solid;
+}
+
+.pcard__corner--tl {
+  top: 8px; left: 8px;
+  border-width: 2px 0 0 2px;
+}
+
+.pcard__corner--tr {
+  top: 8px; right: 8px;
+  border-width: 2px 2px 0 0;
+}
+
+/* top glow strip */
+.pcard--success::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--type-color, var(--primary));
+  box-shadow: 0 0 12px 2px var(--type-glow, var(--glow-p));
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
+.pcard__header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.pcard__id {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.pcard__name {
+  font-family: 'Russo One', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  text-shadow: 0 0 20px var(--type-glow, var(--glow-p));
+}
+
+/* ─── Sprite ─────────────────────────────────────────────── */
+.pcard__sprite-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0.5rem 0 1rem;
+}
+
+.pcard__sprite-ring {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 1px solid var(--type-color, var(--primary));
+  opacity: 0.25;
+  box-shadow: 0 0 20px var(--type-glow, var(--glow-p));
+}
+
+.pcard__sprite {
+  width: 120px;
+  height: 120px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 12px var(--type-glow, var(--glow-p)));
+  position: relative;
+  z-index: 1;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* ─── Types ──────────────────────────────────────────────── */
+.pcard__types {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.type-badge {
+  background: var(--badge-bg);
+  box-shadow: 0 0 10px var(--badge-glow);
+  border-radius: 3px;
+  padding: 0.25rem 0.75rem;
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* ─── Abilities ──────────────────────────────────────────── */
+.pcard__abilities {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+.pcard__section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--primary-lg);
+  margin-bottom: 0.75rem;
+}
+
+.pcard__section-title svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  stroke: var(--primary-lg);
+}
+
+.abilities-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ability-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ability-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--type-color, var(--primary));
+  box-shadow: 0 0 6px var(--type-glow, var(--glow-p));
+  flex-shrink: 0;
+}
+
+.ability-name {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--text);
+}
+
+.hidden-badge {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 0.1rem 0.35rem;
+}
+
+/* ─── Loading Skeleton ───────────────────────────────────── */
+.pcard--loading {
+  pointer-events: none;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-card-2) 0%,
+    var(--border) 50%,
+    var(--bg-card-2) 100%
+  );
+  background-size: 200% 100%;
+  border-radius: 4px;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton--id     { width: 40px; height: 14px; }
+.skeleton--name   { width: 140px; height: 28px; }
+.skeleton--sprite {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  margin: 0.5rem auto 1rem;
+}
+.skeleton--badge  { width: 70px; height: 26px; border-radius: 3px; }
+.skeleton--label  { width: 80px; height: 12px; margin-bottom: 0.5rem; }
+.skeleton--ability      { width: 100%; height: 16px; }
+.skeleton--ability.short { width: 65%; }
+
+/* ─── Error Card ─────────────────────────────────────────── */
+.pcard--error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  border-color: rgba(244, 63, 94, 0.4);
+  background: rgba(244, 63, 94, 0.05);
+}
+
+.error-icon {
+  width: 3rem;
+  height: 3rem;
+  color: var(--cta);
+  filter: drop-shadow(0 0 8px var(--glow-cta));
+}
+
+.error-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.error-title {
+  font-family: 'Russo One', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--cta);
+  text-shadow: 0 0 16px var(--glow-cta);
+}
+
+.error-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  max-width: 28ch;
+  line-height: 1.5;
+}

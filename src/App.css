@@ -1,0 +1,134 @@
+/* ─── Layout ─────────────────────────────────────────────── */
+.app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 4rem;
+  position: relative;
+}
+
+/* ─── CRT Scanlines overlay ──────────────────────────────── */
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-overlay);
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.07) 2px,
+    rgba(0, 0, 0, 0.07) 4px
+  );
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
+.app-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-badge {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: var(--primary-lg);
+  border: 1px solid var(--primary);
+  padding: 0.2rem 0.8rem;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.app-title {
+  font-family: 'Russo One', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+/* Glitch effect */
+.title-glitch {
+  position: relative;
+  color: var(--text);
+  text-shadow:
+    0 0 10px var(--primary-lg),
+    0 0 30px var(--primary),
+    0 0 60px var(--glow-p);
+  display: inline-block;
+}
+
+.title-glitch::before,
+.title-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 0 0 0);
+}
+
+.title-glitch::before {
+  color: var(--cta);
+  animation: glitch-1 4s infinite steps(1);
+  left: 2px;
+  opacity: 0.7;
+}
+
+.title-glitch::after {
+  color: var(--primary-lg);
+  animation: glitch-2 4s infinite steps(1);
+  left: -2px;
+  opacity: 0.7;
+}
+
+@keyframes glitch-1 {
+  0%, 90%, 100% { clip-path: inset(100% 0 0 0); transform: skewX(0); }
+  92%           { clip-path: inset(20% 0 60% 0); transform: skewX(-3deg); }
+  94%           { clip-path: inset(60% 0 10% 0); transform: skewX(2deg); }
+  96%           { clip-path: inset(40% 0 40% 0); transform: skewX(-1deg); }
+}
+
+@keyframes glitch-2 {
+  0%, 88%, 100% { clip-path: inset(100% 0 0 0); transform: skewX(0); }
+  90%           { clip-path: inset(50% 0 30% 0); transform: skewX(3deg); }
+  92%           { clip-path: inset(10% 0 70% 0); transform: skewX(-2deg); }
+  95%           { clip-path: inset(70% 0 5%  0); transform: skewX(1deg); }
+}
+
+.app-subtitle {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+}
+
+/* ─── Main ───────────────────────────────────────────────── */
+.app-main {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* ─── Footer ─────────────────────────────────────────────── */
+.app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-base);
+  background: rgba(15, 15, 35, 0.9);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 0.4rem 1rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  backdrop-filter: blur(8px);
+}
